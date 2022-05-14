@@ -1,5 +1,9 @@
 <template>
     <div class="layout-aside-menu">
+        <div class="logo">
+            <h2 v-if="!commonStore.isCollapse">Vue3 Admon</h2>
+            <h2 v-else>VA</h2>
+        </div>
         <el-menu v-bind="menuStyle" :collapse="commonStore.isCollapse" @open="handleOpen" @close="handleClose">
             <el-sub-menu index="1">
                 <template #title>
@@ -71,8 +75,19 @@ const menuStyle = {
     padding: 0px;
 }
 
+.logo {
+    height: 40px;
+    background-color: #001529;
+    text-align: center;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 5px;
+}
+
 .el-menu-vertical {
-    height: 100%;
+    height: calc(100% - 40px);
     border-right-width: 0px;
 
     .el-menu-item.is-active {

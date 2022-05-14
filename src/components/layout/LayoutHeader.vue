@@ -11,7 +11,7 @@
                 <LayoutHeaderBeadcrumb />
             </el-col>
             <el-col class="header-right" :span="16">
-                <span class="header-trigger-icon custom-button space-left">
+                <span class="header-trigger-icon custom-button space-left" @click="toggle">
                     <el-icon :size="commonStore.iconSize">
                         <FullScreen />
                     </el-icon>
@@ -59,10 +59,14 @@ import { useCommonStore } from '@/stores/common'
 import { useLocale } from '@/locales/useLocale'
 import type { LocaleType } from "~/config";
 import LayoutHeaderBeadcrumb from '@/components/layout/LayoutHeaderBeadcrumb.vue'
+import { useFullscreen } from '@vueuse/core'
 
+const { toggle } = useFullscreen()
 const commonStore = useCommonStore();
-const squareUrl = "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"
 const localeUtil = useLocale();
+
+const squareUrl = "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"
+
 const handleChangeLang = (lange: LocaleType) => {
     localeUtil.changeLocale(lange)
 }

@@ -32,7 +32,7 @@ import LayoutHeader from '@/components/layout/LayoutHeader.vue'
   }
 
   .el-aside {
-    background-color: #007973;
+    background-color: #001529;
   }
 
   .el-header {
