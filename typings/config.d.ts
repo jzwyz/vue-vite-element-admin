@@ -1,0 +1,1 @@
+export type LocaleType = 'zh-CN' | 'en'
