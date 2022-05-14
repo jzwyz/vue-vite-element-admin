@@ -1,7 +1,7 @@
 <template>
     <div class="layout-header-beadcrumb">
         <el-breadcrumb class="space-left" separator="/">
-            <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/' }">{{$t('component.layout.header.beadcrumb.home')}}</el-breadcrumb-item>
             <el-breadcrumb-item :key="item" v-for="item in breadcrumbs">{{ item }}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>

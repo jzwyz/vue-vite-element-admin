@@ -31,4 +31,6 @@ export async function setupI18n(app: App<Element>) {
     const options = await createI18nOptions();
     i18n = createI18n(options) as any
     app.use(i18n);
+    // 向 vue全局属性上注册 t 函数，快捷国际化
+    app.config.globalProperties.$t = i18n.global.t;
 }

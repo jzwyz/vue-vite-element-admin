@@ -3,13 +3,22 @@ import { RouteRecordRaw } from 'vue-router'
 
 const config: RouteRecordRaw[] = [
     {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/Login.vue'),
+    },
+    {
         path: '/',
-        name: 'home',
+        name: 'root',
+        redirect: '/system'
+    },
+    {
+        path: '/system',
+        name: 'system',
         component: Layout,
-        redirect: '/system',
         children: [
             {
-                path: 'system',
+                path: '',
                 name: 'system',
                 component: () => import('@/views/system/Home.vue'),
             }

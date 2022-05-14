@@ -1,5 +1,25 @@
 {
     "default": {
         "btn_1": "按钮1"
+    },
+    "views": {
+        "login": {
+            "login_btn": "登陆",
+            "username_error": "请输入用户名",
+            "password_error": "请输入用户密码",
+            "page_title": "系统登陆页",
+            "login_error": "请输入用户名或密码",
+            "login_success": "登陆成功！正在跳转首页"
+        }
+    },
+    "component": {
+        "layout": {
+            "header": {
+                "logout": "退出系统",
+                "beadcrumb": {
+                    "home": "首页"
+                }
+            }
+        }
     }
 }

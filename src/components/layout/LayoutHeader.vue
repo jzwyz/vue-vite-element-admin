@@ -16,31 +16,17 @@
                         <FullScreen />
                     </el-icon>
                 </span>
-                <el-dropdown style="height: 100%" @command="handleChangeLang">
-                    <div class="dropdown-change-lang">
-                        <el-icon :size="commonStore.iconSize">
-                            <svg class="icon" aria-hidden="true">
-                                <use xlink:href="#vvea-i18n"></use>
-                            </svg>
-                        </el-icon>
-                    </div>
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                            <el-dropdown-item :disabled="localeUtil.getLocale.value == 'zh-CN'" command="zh-CN">简体中文
-                            </el-dropdown-item>
-                            <el-dropdown-item :disabled="localeUtil.getLocale.value == 'en'" command="en">英语
-                            </el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
-                </el-dropdown>
-                <el-dropdown style="height: 100%" class="space-left">
+                <span class="header-trigger-icon custom-button">
+                    <LayoutHeaderLocale :isBtn="false" />
+                </span>
+                <el-dropdown style="height: 100%" class="space-left" @command="handleUserCommand">
                     <div class="dropdown-userinfo">
                         <el-avatar shape="square" :size="26" :src="squareUrl" />
                         <span class="space-left">Jason.Jiang</span>
                     </div>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item>退出系统</el-dropdown-item>
+                            <el-dropdown-item command="logout">{{$t('component.layout.header.logout')}}</el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
@@ -56,19 +42,23 @@
 
 <script setup lang="ts">
 import { useCommonStore } from '@/stores/common'
-import { useLocale } from '@/locales/useLocale'
-import type { LocaleType } from "~/config";
 import LayoutHeaderBeadcrumb from '@/components/layout/LayoutHeaderBeadcrumb.vue'
+import LayoutHeaderLocale from '@/components/layout/LayoutHeaderLocale.vue'
 import { useFullscreen } from '@vueuse/core'
+import { useRouter } from 'vue-router';
 
 const { toggle } = useFullscreen()
 const commonStore = useCommonStore();
-const localeUtil = useLocale();
 
 const squareUrl = "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"
 
-const handleChangeLang = (lange: LocaleType) => {
-    localeUtil.changeLocale(lange)
+const router = useRouter()
+const userCommandMap = {
+    'logout': () => router.push({ name: 'login' })
+}
+const handleUserCommand = (comd: string) => {
+    if (!(comd in userCommandMap)) return;
+    userCommandMap[comd]()
 }
 </script>
 
@@ -104,8 +94,7 @@ const handleChangeLang = (lange: LocaleType) => {
     align-items: center;
 }
 
-.dropdown-userinfo,
-.dropdown-change-lang {
+.dropdown-userinfo {
     display: flex;
     justify-content: center;
     align-items: center;

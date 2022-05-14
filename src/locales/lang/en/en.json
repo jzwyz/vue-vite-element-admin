@@ -1,5 +1,25 @@
 {
     "default": {
         "btn_1": "Button 1"
+    },
+    "views": {
+        "login": {
+            "login_btn": "Login",
+            "username_error": "Please input username",
+            "password_error": "Please input password",
+            "page_title": "System Login Page",
+            "login_error": "Please input username or password",
+            "login_success": "Login success! to home"
+        }
+    },
+    "component": {
+        "layout": {
+            "header": {
+                "logout": "Logout",
+                "beadcrumb": {
+                    "home": "Home"
+                }
+            }
+        }
     }
 }
