@@ -8,7 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "strictFunctionTypes": false,
-    "importsNotUsedAsValues": "preserve",
     "jsx": "preserve",
     "baseUrl": ".",
     "allowJs": true,
@@ -48,5 +47,9 @@
     "mock/**/*.ts",
     "vite.config.ts"
   ],
-  "exclude": ["node_modules", "dist", "**/*.js"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js"
+  ]
 }
