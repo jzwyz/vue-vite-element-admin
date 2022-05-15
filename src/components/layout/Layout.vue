@@ -31,14 +31,9 @@ import LayoutHeader from '@/components/layout/LayoutHeader.vue'
     height: 100%;
   }
 
-  .el-aside {
-    background-color: #001529;
-  }
-
   .el-header {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #eee;
     padding: 0px;
   }
 }

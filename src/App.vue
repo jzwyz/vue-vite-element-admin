@@ -15,7 +15,3 @@ const elConfigProviderModel: any = reactive({
 	locale: localeUtil.getElLocale
 })
 </script>
-
-<style>
-@import '@/assets/base.css';
-</style>

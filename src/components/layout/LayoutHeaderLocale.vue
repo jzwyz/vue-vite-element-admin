@@ -49,7 +49,6 @@ const handleChangeLang = (lange: LocaleType) => {
 }
 
 .lhl-default {
-    background-color: #fff;
     border-radius: 4px;
     height: 30px;
 }

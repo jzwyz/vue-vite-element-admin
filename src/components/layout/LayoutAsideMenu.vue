@@ -66,6 +66,7 @@ const menuStyle = {
     'background-color': '#001529',
     'text-color': '#ffffffb3',
     'active-text-color': '#ffffff'
+
 }
 </script>
 
@@ -73,30 +74,25 @@ const menuStyle = {
 .layout-aside-menu {
     height: 100%;
     padding: 0px;
+    background-color: #001529;
 }
 
 .logo {
     height: 40px;
     background-color: #001529;
-    text-align: center;
     color: #ffffff;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0px 5px;
 }
 
 .el-menu-vertical {
-    height: calc(100% - 40px);
     border-right-width: 0px;
-
-    .el-menu-item.is-active {
-        background-color: #0960bd;
-    }
 }
 
 .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
-    min-height: 400px;
+    min-height: calc(100% - 40px);
 }
 </style>

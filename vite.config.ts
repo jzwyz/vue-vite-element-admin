@@ -44,5 +44,12 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       brotliSize: false,
       chunkSizeWarningLimit: 2000,
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "@/styles/element/index.scss" as *;`,
+        },
+      },
+    },
   }
 }

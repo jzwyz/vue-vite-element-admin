@@ -1,7 +1,6 @@
 import ElementPlus from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
-import 'element-plus/dist/index.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
+import '@/styles/index.scss'
 import type { App } from 'vue'
 
 export function registerGloabCom(app: App<Element>) {

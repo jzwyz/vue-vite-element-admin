@@ -11,9 +11,9 @@
                 <LayoutHeaderBeadcrumb />
             </el-col>
             <el-col class="header-right" :span="16">
-                <span class="header-trigger-icon custom-button space-left">
-                    <el-switch v-model="isDark" @change="configStore.changeDarkStatus" inline-prompt active-text="黑"
-                        inactive-text="白" active-color="#000" />
+                <span class="header-trigger-icon space-left">
+                    <el-switch v-model="isDark" @change="changeTheme" inline-prompt active-text="黑" inactive-text="白"
+                        active-color="#000" />
                 </span>
                 <span class="header-trigger-icon custom-button space-left" @click="toggle">
                     <el-icon :size="commonStore.iconSize">
@@ -42,12 +42,13 @@
 
 <script setup lang="ts">
 import { useCommonStore } from '@/stores/common'
-import { useConfigStore } from '@/stores/config'
 import LayoutHeaderBeadcrumb from '@/components/layout/LayoutHeaderBeadcrumb.vue'
 import LayoutHeaderLocale from '@/components/layout/LayoutHeaderLocale.vue'
 import { useFullscreen } from '@vueuse/core'
 import { useRouter } from 'vue-router';
-import { computed } from '@vue/reactivity'
+import { useDark, useToggle } from '@vueuse/core'
+
+
 
 const { toggle } = useFullscreen()
 const commonStore = useCommonStore();
@@ -63,8 +64,14 @@ const handleUserCommand = (comd: string) => {
     userCommandMap[comd]()
 }
 
-const configStore = useConfigStore()
-const isDark = computed(() => configStore.dark)
+/**
+ * 切换 light/dark
+ */
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+const changeTheme = (status: boolean) => {
+    toggleDark(status);
+}
 </script>
 
 <style scoped lang="scss">

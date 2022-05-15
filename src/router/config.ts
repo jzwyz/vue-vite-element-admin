@@ -1,17 +1,7 @@
 import Layout from '@/components/layout/Layout.vue'
 import { RouteRecordRaw } from 'vue-router'
 
-const config: RouteRecordRaw[] = [
-    {
-        path: '/login',
-        name: 'login',
-        component: () => import('@/views/Login.vue'),
-    },
-    {
-        path: '/',
-        name: 'root',
-        redirect: '/system'
-    },
+const menuConfig: RouteRecordRaw[] = [
     {
         path: '/system',
         name: 'system',
@@ -23,7 +13,21 @@ const config: RouteRecordRaw[] = [
                 component: () => import('@/views/system/Home.vue'),
             }
         ]
+    }
+]
+
+const config: RouteRecordRaw[] = [
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/Login.vue'),
     },
+    {
+        path: '/',
+        name: 'root',
+        redirect: '/login'
+    },
+    ...menuConfig,
     {
         path: '/:(.status)',
         name: 'error',
@@ -31,4 +35,4 @@ const config: RouteRecordRaw[] = [
     }
 ]
 
-export { config }
+export { config, menuConfig }
