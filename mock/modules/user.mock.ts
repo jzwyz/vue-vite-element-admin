@@ -1,5 +1,5 @@
 import { MockMethod } from 'vite-plugin-mock'
-import { HandleResponse, responseSuccess } from '../_utils';
+import { HandleResponse, responseError, responseSuccess } from '../_utils';
 // import faker from 'faker';
 
 const mocks: MockMethod[] = [
@@ -8,6 +8,9 @@ const mocks: MockMethod[] = [
         method: 'post',
         response: ({ body }: HandleResponse) => {
             console.log(body);
+            if (body.username !== 'admin' || body.password !== 'admin') {
+                return responseError();
+            }
             return responseSuccess('ok')
         }
     },
