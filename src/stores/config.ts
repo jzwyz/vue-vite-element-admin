@@ -1,3 +1,4 @@
+import { setHtmlDark } from '@/utils/domUtil';
 import { defineStore } from 'pinia'
 
 const useConfigStore = defineStore({
@@ -10,13 +11,17 @@ const useConfigStore = defineStore({
             message: {
                 max: 3
             }
-        }
+        },
+        dark: false
     }),
     getters: {
 
     },
     actions: {
-
+        changeDarkStatus(status: boolean) {
+            this.dark = status;
+            setHtmlDark(status);
+        }
     }
 })
 

@@ -11,6 +11,10 @@
                 <LayoutHeaderBeadcrumb />
             </el-col>
             <el-col class="header-right" :span="16">
+                <span class="header-trigger-icon custom-button space-left">
+                    <el-switch v-model="isDark" @change="configStore.changeDarkStatus" inline-prompt active-text="黑"
+                        inactive-text="白" active-color="#000" />
+                </span>
                 <span class="header-trigger-icon custom-button space-left" @click="toggle">
                     <el-icon :size="commonStore.iconSize">
                         <FullScreen />
@@ -19,22 +23,18 @@
                 <span class="header-trigger-icon custom-button">
                     <LayoutHeaderLocale :isBtn="false" />
                 </span>
-                <el-dropdown style="height: 100%" class="space-left" @command="handleUserCommand">
+                <el-dropdown style="height: 100%" class="space-left space-right" @command="handleUserCommand">
                     <div class="dropdown-userinfo">
                         <el-avatar shape="square" :size="26" :src="squareUrl" />
                         <span class="space-left">Jason.Jiang</span>
                     </div>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item command="logout">{{$t('component.layout.header.logout')}}</el-dropdown-item>
+                            <el-dropdown-item command="logout">{{ $t('component.layout.header.logout') }}
+                            </el-dropdown-item>
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
-                <span class="header-trigger-icon custom-button space-left">
-                    <el-icon :size="commonStore.iconSize">
-                        <Setting />
-                    </el-icon>
-                </span>
             </el-col>
         </el-row>
     </div>
@@ -42,10 +42,12 @@
 
 <script setup lang="ts">
 import { useCommonStore } from '@/stores/common'
+import { useConfigStore } from '@/stores/config'
 import LayoutHeaderBeadcrumb from '@/components/layout/LayoutHeaderBeadcrumb.vue'
 import LayoutHeaderLocale from '@/components/layout/LayoutHeaderLocale.vue'
 import { useFullscreen } from '@vueuse/core'
 import { useRouter } from 'vue-router';
+import { computed } from '@vue/reactivity'
 
 const { toggle } = useFullscreen()
 const commonStore = useCommonStore();
@@ -60,6 +62,9 @@ const handleUserCommand = (comd: string) => {
     if (!(comd in userCommandMap)) return;
     userCommandMap[comd]()
 }
+
+const configStore = useConfigStore()
+const isDark = computed(() => configStore.dark)
 </script>
 
 <style scoped lang="scss">
