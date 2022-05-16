@@ -10,13 +10,13 @@ import { setupRouter } from '@/router'
 async function bootstrap() {
     const app = createApp(App)
 
+    setupRouter(app)
+
     setupStore(app)
 
     registerGloabCom(app)
 
     await setupI18n(app)
-
-    setupRouter(app)
 
     setupAxios(app)
 

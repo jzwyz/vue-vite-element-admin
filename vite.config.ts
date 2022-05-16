@@ -4,6 +4,9 @@ import { ConfigEnv, loadEnv, UserConfigExport } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { viteMockServe } from 'vite-plugin-mock';
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 const OUTPUT_DIR = './dist'
 
@@ -19,6 +22,18 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     plugins: [
       vue(),
       vueJsx(),
+      // 自动导入
+      AutoImport({
+        resolvers: [
+          ElementPlusResolver()
+        ],
+      }),
+      // 自动注册
+      Components({
+        resolvers: [
+          ElementPlusResolver()
+        ],
+      }),
       // TODO:只在开发、预览环境中使用 mock demo 数据
       viteMockServe({
         ignore: /^\_/,

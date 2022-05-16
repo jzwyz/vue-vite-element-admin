@@ -1,5 +1,5 @@
-import { App } from 'vue'
-import { createRouter, createWebHistory, Router } from 'vue-router'
+import type { App } from 'vue'
+import { createRouter, createWebHashHistory, Router } from 'vue-router'
 import { config } from './config'
 import NProgress from 'nprogress';
 
@@ -27,7 +27,8 @@ function handleRouteGuard() {
 
 const setupRouter = (app: App<Element>) => {
   router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    history: createWebHashHistory(import.meta.env.BASE_URL),
+    strict: true,
     routes: config
   })
 

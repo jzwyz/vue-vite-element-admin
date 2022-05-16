@@ -9,7 +9,7 @@ const menuConfig: RouteRecordRaw[] = [
         children: [
             {
                 path: '',
-                name: 'system',
+                name: 'syshome',
                 component: () => import('@/views/system/Home.vue'),
             }
         ]
@@ -25,13 +25,14 @@ const config: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'root',
-        redirect: '/login'
+        redirect: '/system',
+        meta: { title: 'root' }
     },
     ...menuConfig,
     {
-        path: '/:(.status)',
+        path: '/:path(.*)*',
         name: 'error',
-        component: Layout
+        component: () => import('@/views/Login.vue'),
     }
 ]
 
