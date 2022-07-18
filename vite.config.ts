@@ -56,7 +56,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       target: 'es2015',
       cssTarget: 'chrome80',
       outDir: OUTPUT_DIR,
-      brotliSize: false,
       chunkSizeWarningLimit: 2000,
     },
     css: {
@@ -65,6 +64,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           additionalData: `@use "@/styles/element/index.scss" as *;`,
         },
       },
-    },
+    }
   }
 }
