@@ -26,12 +26,12 @@ import LayoutHeader from '@/components/layout/LayoutHeader.vue'
   width: 100%;
   height: 100%;
 
-  .el-container {
+  .vvea-container {
     width: 100%;
     height: 100%;
   }
 
-  .el-header {
+  .vvea-header {
     display: flex;
     align-items: center;
     padding: 0px;

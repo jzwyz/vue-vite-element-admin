@@ -1,1 +1,1 @@
-export type LocaleType = 'zh-CN' | 'en'
+export declare type LocaleType = 'zh-CN' | 'en'

@@ -1,73 +1,30 @@
 <template>
     <div class="layout-aside-menu">
         <div class="logo">
-            <h2 v-if="!commonStore.isCollapse">Vue3 Admon</h2>
-            <h2 v-else>VA</h2>
+            <h4 v-if="!configStore.isCollapse">{{ title }}</h4>
+            <h4 v-else>{{ sub_title }}</h4>
         </div>
-        <el-menu v-bind="menuStyle" :collapse="commonStore.isCollapse" @open="handleOpen" @close="handleClose">
-            <el-sub-menu index="1">
-                <template #title>
-                    <el-icon>
-                        <location />
-                    </el-icon>
-                    <span>Navigator One</span>
-                </template>
-                <el-menu-item-group>
-                    <template #title><span>Group One</span></template>
-                    <el-menu-item index="1-1">item one</el-menu-item>
-                    <el-menu-item index="1-2">item two</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group title="Group Two">
-                    <el-menu-item index="1-3">item three</el-menu-item>
-                </el-menu-item-group>
-                <el-sub-menu index="1-4">
-                    <template #title><span>item four</span></template>
-                    <el-menu-item index="1-4-1">item one</el-menu-item>
-                </el-sub-menu>
-            </el-sub-menu>
-            <el-menu-item index="2">
-                <el-icon>
-                    <Menu />
-                </el-icon>
-                <template #title>Navigator Two</template>
-            </el-menu-item>
-            <el-menu-item index="3" disabled>
-                <el-icon>
-                    <document />
-                </el-icon>
-                <template #title>Navigator Three</template>
-            </el-menu-item>
-            <el-menu-item index="4">
-                <el-icon>
-                    <setting />
-                </el-icon>
-                <template #title>Navigator Four</template>
-            </el-menu-item>
+         <el-menu class="vvea-menu-vertical" :defaultActive="route.path" :collapse="configStore.isCollapse">
+            <template v-for="menuItem in menus" :key="menuItem.name">
+                <layout-aside-menu-item :perfix="['/', menuItem.meta?.perfix || 'system']" :menuItem="menuItem" />
+            </template>
         </el-menu>
     </div>
 </template>
 
 <script setup lang="ts">
-import { useCommonStore } from '@/stores/common'
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { useConfigStore } from '@/stores/config'
+import { sortBy } from 'lodash-es';
 
-const commonStore = useCommonStore();
+const configStore = useConfigStore();
+const route = useRoute()
 
-// 监听 Menu展开/关闭
-const handleOpen = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
-}
+const menus = computed(() => sortBy(configStore.getMenus, (itme, index) => itme.meta?.index || index * 100))
 
-const menuStyle = {
-    class: 'el-menu-vertical',
-    'default-active': '2',
-    'background-color': '#001529',
-    'text-color': '#ffffffb3',
-    'active-text-color': '#ffffff'
-
-}
+const title = import.meta.env.VITE_APP_TITLE
+const sub_title = import.meta.env.VITE_APP_TITLE_SUB
 </script>
 
 <style scoped lang="scss">
@@ -87,11 +44,11 @@ const menuStyle = {
     justify-content: center;
 }
 
-.el-menu-vertical {
+.vvea-menu-vertical {
     border-right-width: 0px;
 }
 
-.el-menu-vertical:not(.el-menu--collapse) {
+.vvea-menu-vertical:not(.vvea-menu--collapse) {
     width: 200px;
     min-height: calc(100% - 40px);
 }

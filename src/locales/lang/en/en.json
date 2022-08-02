@@ -1,26 +1,60 @@
 {
     "default": {
-        "btn_1": "Button 1"
+        "btn_1": "Button 1",
+        "submit": "Submit",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "close": "Close",
+        "reset_btn": "Reset",
+        "copy_success": "Copy succeeded",
+        "operation_success": "Operation successful",
+        "operation_faild": "Operation failed",
+        "operation_faild_msg": "Operation failed: {msg}"
     },
     "views": {
         "login": {
             "login_btn": "Login",
-            "username_error": "Please input username",
-            "password_error": "Please input password",
-            "page_title": "System Login Page",
-            "login_error": "Please input username or password",
-            "login_success": "Login success! to home",
-            "login_faild": "username or password error"
+            "username_error": "Please enter a username",
+            "password_error": "Please enter user password",
+            "page_title": "System Landing Page",
+            "login_error": "Please enter username or password",
+            "login_success": "Login successful! Jumping to the home page",
+            "login_faild": "Incorrect username or password"
         }
     },
     "component": {
         "layout": {
             "header": {
                 "logout": "Logout",
+                "logout_message": "Are you sure you want to log out?",
+                "not_login_msg": "Not logged in",
                 "beadcrumb": {
                     "home": "Home"
                 }
             }
         }
+    },
+    "route_menu": {
+        "system": "System Home",
+        "home": "System Home",
+        "scheduler": "Scheduled tasks",
+        "login": "User login",
+        "dashboard": "Dashboard",
+        "error": "Error",
+        "user": "User Management",
+        "jobs": "Job List",
+        "amazon_spider_report": "Task Report"
+    },
+    "api_message": {
+        "not_login": "Not logged in",
+        "unauthorized": "Unauthorized",
+        "forbidden": "Forbidden",
+        "not_found": "Resource not found",
+        "method_not_allowed": "Method not allowed",
+        "internal_server_error": "Server Error",
+        "bad_gateway": "Bad gateway",
+        "gateway_time_out": "Gateway Timeout",
+        "request_timed_out": "Request timed out",
+        "request_error": "Request error, please try again"
     }
 }

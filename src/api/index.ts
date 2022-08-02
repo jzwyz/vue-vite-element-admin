@@ -2,13 +2,12 @@ import type { App } from 'vue';
 import qs from 'qs';
 import Axios, { AxiosInstance } from 'axios';
 import NProgress from 'nprogress';
-import { buildErrorMap } from './utils'
-
-const { BASE_API_PREFIX, BASE_API_TIMEOUT } = import.meta.env;
+import { buildErrorMap, DefaultBody } from './utils'
+import { parse_cache_value } from '@/utils/cache';
+import { CacheEnum } from '@/enums/cache';
+import { BASE_API_PREFIX, BASE_API_TIMEOUT } from '@/config/constants'
 
 let axios: AxiosInstance;
-
-const defaultBody = { data: null, status: 500, statusText: '' };
 
 
 function setupAxios(app: App<Element>) {
@@ -26,13 +25,16 @@ function setupAxios(app: App<Element>) {
     })
 
     const handleErrorStatus = buildErrorMap();
-
     axios.interceptors.request.use(function (config) {
         NProgress.start();
+        const loginUserInfo = parse_cache_value(CacheEnum.LOGIN_INFOS, 'sessionStorage', true)
+        if (loginUserInfo) {
+            config.headers && (config.headers['authorization'] = loginUserInfo['access_token'])
+        }
         return config;
     }, function (error) {
         console.error(error);
-        return Promise.resolve(defaultBody)
+        return Promise.resolve(DefaultBody)
     })
 
     axios.interceptors.response.use(function (response) {
@@ -43,6 +45,7 @@ function setupAxios(app: App<Element>) {
         NProgress.done();
         let { status, statusText } = error.response || { status: '-1', statusText: '' }
         if (!(`${status}` in handleErrorStatus)) status = '-1'
+        console.error('--->', error.response, error)
         handleErrorStatus[status + '']();
         return Promise.resolve({ data: null, status, statusText })
     })

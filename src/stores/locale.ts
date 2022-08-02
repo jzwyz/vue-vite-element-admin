@@ -1,25 +1,24 @@
 import { defineStore } from 'pinia'
-import type { LocaleType } from "~/config";
-
-interface LocaleInfo {
-    locale: LocaleType
-}
+import type { LocaleStoreState } from "~/store";
+import { setLocalCache, getLocalCache } from '@/utils/cache'
+import { CacheEnum } from '@/enums/cache';
 
 const useLocaleStore = defineStore({
     id: 'locale',
     state: () => ({
         locale: 'zh-CN'
-    }),
+    }) as LocaleStoreState,
     getters: {
 
     },
     actions: {
-        setLocaleInfo(info: LocaleInfo) {
+        setLocaleInfo(info: LocaleStoreState) {
             this.locale = info.locale || this.locale || 'zh-CN'
-            // todo: cache locale
+            setLocalCache(CacheEnum.LANG, this.locale, -1)
         },
         initLocale() {
-            this.setLocaleInfo({ locale: 'zh-CN' })
+            const lang = getLocalCache(CacheEnum.LANG)
+            this.locale = lang || 'zh-CN'
         }
     }
 })

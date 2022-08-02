@@ -1,6 +1,15 @@
 {
     "default": {
-        "btn_1": "按钮1"
+        "btn_1": "按钮1",
+        "submit": "提交",
+        "confirm": "确认",
+        "cancel": "取消",
+        "close": "关闭",
+        "reset_btn": "重置",
+        "copy_success": "复制成功",
+        "operation_success": "操作成功",
+        "operation_faild": "操作失败",
+        "operation_faild_msg": "操作失败: {msg}"
     },
     "views": {
         "login": {
@@ -17,10 +26,35 @@
         "layout": {
             "header": {
                 "logout": "退出系统",
+                "logout_message": "是否确认退出系统？",
+                "not_login_msg": "未登录",
                 "beadcrumb": {
                     "home": "首页"
                 }
             }
         }
+    },
+    "route_menu": {
+        "system": "系统首页",
+        "home": "系统首页",
+        "scheduler": "调度任务",
+        "login": "用户登陆",
+        "dashboard": "仪表板",
+        "error": "错误",
+        "user": "用户管理",
+        "jobs": "任务列表",
+        "amazon_spider_report": "任务报告"
+    },
+    "api_message": {
+        "not_login": "未登录",
+        "unauthorized": "未经授权",
+        "forbidden": "禁止访问",
+        "not_found": "找不到资源",
+        "method_not_allowed": "不允许的方法",
+        "internal_server_error": "服务器错误",
+        "bad_gateway": "错误的网关",
+        "gateway_time_out": "网关超时",
+        "request_timed_out": "请求超时",
+        "request_error": "请求错误，请重试"
     }
 }

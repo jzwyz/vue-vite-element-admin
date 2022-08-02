@@ -16,14 +16,7 @@
                 message: $t('views.login.password_error'),
                 trigger: 'blur',
             }">
-                <el-input :prefix-icon="Lock" v-model="userInfo.password" :type="passwdHide ? 'password' : 'text'">
-                    <template #suffix>
-                        <el-icon @click="handlePasswdHide">
-                            <Hide v-if="passwdHide" />
-                            <View v-else />
-                        </el-icon>
-                    </template>
-                </el-input>
+                <el-input :prefix-icon="Lock" v-model="userInfo.password" type="password" show-password />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" style="width: 100%" @click="submitForm(formRef)" :loading="loading">
@@ -38,22 +31,18 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, unref } from 'vue'
-import { FormInstance, ElMessage } from 'element-plus'
+import { reactive, ref, unref, onMounted } from 'vue'
+import { FormInstance } from 'element-plus'
 import { User, Lock } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router';
 import LayoutHeaderLocale from '@/components/layout/LayoutHeaderLocale.vue'
-import { useI18n } from 'vue-i18n';
-import { axios } from '@/api';
+import { useI18n } from '@/hooks/useI18n'
+import { login } from '@/api/user';
+import { useUserStore } from '@/stores/user'
 
 interface UserInfo {
     username: string;
     password: string;
-}
-
-const passwdHide = ref(true)
-const handlePasswdHide = () => {
-    passwdHide.value = !passwdHide.value;
 }
 
 const formRef = ref<FormInstance>()
@@ -62,25 +51,27 @@ const userInfo = reactive<UserInfo>({
     password: 'admin'
 })
 
-const { t } = useI18n()
-
+const { t } = useI18n('views.login')
 const router = useRouter()
+const userStore = useUserStore()
+
 const loading = ref(false)
+
 const submitForm = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
 
     try {
         loading.value = true
         const hasValidate = await formEl.validate();
-        if (!hasValidate) return ElMessage.error(t('views.login.login_error'))
+        if (!hasValidate) return ElMessage.error(t('login_error'))
 
-        const result = await axios.post('/login', unref(userInfo));
-        console.log('---->', result);
-        if (result.data === 'ok') {
-            ElMessage.success(t('views.login.login_success'))
-            router.push('/system')
+        const result = await login(unref(userInfo));
+        if (result.code === 1000) {
+            ElMessage.success(t('login_success'))
+            userStore.setLoginInfo(result.data)
+            router.push({ name: 'system' })
         } else {
-            ElMessage.warning(t('views.login.login_faild'))
+            ElMessage.warning(t('login_faild'))
         }
     } catch (error) {
         console.error(error);
@@ -88,6 +79,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         loading.value = false
     }
 }
+
+onMounted(() => {
+    userStore.loadCacheLoginInfo()
+    userStore.isLogin && router.push({ name: 'system' })
+})
 
 </script>
 

@@ -2,7 +2,7 @@
     <div :class="{ 'layout-header-locale': true, 'lhl-default': isBtn }">
         <el-dropdown style="height: 100%" @command="handleChangeLang">
             <div class="dropdown-change-lang">
-                <el-icon :size="commonStore.iconSize">
+                <el-icon :size="configStore.iconSize">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#vvea-i18n"></use>
                     </svg>
@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import type { LocaleType } from "~/config";
-import { useCommonStore } from '@/stores/common'
+import { useConfigStore } from '@/stores/config'
 import { useLocale } from '@/locales/useLocale'
 
 // 声明组件的属性
@@ -35,7 +35,7 @@ defineProps({
     }
 })
 
-const commonStore = useCommonStore();
+const configStore = useConfigStore();
 const localeUtil = useLocale();
 const handleChangeLang = (lange: LocaleType) => {
     localeUtil.changeLocale(lange)

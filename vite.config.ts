@@ -19,33 +19,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   console.log('vite.config.ts: ', root, env, isBuild)
 
   return {
-    plugins: [
-      vue(),
-      vueJsx(),
-      // 自动导入
-      AutoImport({
-        resolvers: [
-          ElementPlusResolver()
-        ],
-      }),
-      // 自动注册
-      Components({
-        resolvers: [
-          ElementPlusResolver()
-        ],
-      }),
-      // TODO:只在开发、预览环境中使用 mock demo 数据
-      viteMockServe({
-        ignore: /^\_/,
-        mockPath: 'mock',
-        localEnabled: !isBuild,
-        prodEnabled: !isBuild,
-        injectCode: `
-          import { setupProdMockServer } from '../mock/_createMockServer';
-          setupProdMockServer();
-          `
-      })
-    ],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -64,6 +37,35 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           additionalData: `@use "@/styles/element/index.scss" as *;`,
         },
       },
-    }
+    },
+    plugins: [
+      vue(),
+      vueJsx(),
+      // 自动导入
+      AutoImport({
+        resolvers: [
+          ElementPlusResolver()
+        ],
+      }),
+      // 自动注册
+      Components({
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: "sass" // 自动导入样式文件
+          })
+        ],
+      }),
+      // TODO:只在开发、预览环境中使用 mock demo 数据
+      viteMockServe({
+        ignore: /^\_/,
+        mockPath: 'mock',
+        localEnabled: !isBuild,
+        prodEnabled: !isBuild,
+        injectCode: `
+          import { setupProdMockServer } from '../mock/_createMockServer';
+          setupProdMockServer();
+          `
+      })
+    ]
   }
 }

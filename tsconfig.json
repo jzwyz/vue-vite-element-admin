@@ -45,7 +45,9 @@
     "typings/**/*.d.ts",
     "typings/**/*.ts",
     "mock/**/*.ts",
-    "vite.config.ts"
+    "vite.config.ts",
+    "auto-imports.d.ts",
+    "components.d.ts"
   ],
   "exclude": [
     "node_modules",

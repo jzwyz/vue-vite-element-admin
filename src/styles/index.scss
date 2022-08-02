@@ -1,5 +1,5 @@
 // :root {
-//   --el-color-primary: red;
+//   --vvea-color-primary: red;
 // }
 
 *,
@@ -11,6 +11,11 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: "MiSans-Regular";
+  src: url(/fonts/MiSans-Regular.ttf);
+}
+
 body {
   width: 100vw;
   height: 100vh;
@@ -18,8 +23,7 @@ body {
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: "MiSans-Regular";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
@@ -29,15 +33,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  color: var(--el-color-primary);
-}
-
 code {
   border-radius: 2px;
   padding: 2px 4px;
-  background-color: var(--el-color-primary-light-9);
-  color: var(--el-color-primary);
+  background-color: var(--vvea-color-primary-light-9);
+  color: var(--vvea-color-primary);
 }
 
 #app {
@@ -46,14 +46,49 @@ code {
   margin: 0px;
   padding: 0px;
   font-weight: normal;
-  color: var(--el-text-color-primary);
+  color: var(--vvea-text-color-primary);
+}
+
+#nprogress {
+  .bar {
+    background: var(--vvea-color-primary) !important;
+  }
+  .peg {
+    -webkit-box-shadow: 0 0 10pxvar (--vvea-color-primary),
+      0 0 5pxvar (--vvea-color-primary) !important;
+    box-shadow: 0 0 10pxvar (--vvea-color-primary),
+      0 0 5pxvar (--vvea-color-primary) !important;
+  }
+  .spinner-icon {
+    border-top-color: var(--vvea-color-primary) !important;
+    border-left-color: var(--vvea-color-primary) !important;
+  }
+}
+
+a {
+  color: var(--vvea-color-primary);
+  text-decoration: none;
+}
+a:hover,
+a:active,
+a:visited,
+a:link {
+  color: var(--vvea-color-primary);
+}
+
+iframe {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  height: 99%;
 }
 
 .custom-button {
   background-color: auto;
 }
 .custom-button:hover {
-  background-color: var(--el-color-info-light-8);
+  background-color: var(--vvea-color-info-light-8);
   transition: background-color 0.5s;
 }
 
@@ -71,4 +106,33 @@ code {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+
+.word-overflow-ellipsis .cell,
+.word-overflow-ellipsis .cell span {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background: rgba(20, 20, 20, 0.048);
+  -webkit-box-shadow: inset 0 0 5px rgba(20, 20, 20, 0.041);
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: rgba(17, 17, 17, 0.151);
+  -webkit-box-shadow: inset 0 0 10px rgba(19, 19, 19, 0.08);
+}
+
+.vvea-button {
+  font-family: "MiSans-Regular" !important;
 }

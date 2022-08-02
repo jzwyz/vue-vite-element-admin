@@ -4,14 +4,21 @@ import { HandleResponse, responseError, responseSuccess } from '../_utils';
 
 const mocks: MockMethod[] = [
     {
-        url: '/api/login',
+        url: '/api/v1/user/login',
         method: 'post',
         response: ({ body }: HandleResponse) => {
             console.log(body);
             if (body.username !== 'admin' || body.password !== 'admin') {
                 return responseError();
             }
-            return responseSuccess('ok')
+            return responseSuccess({
+                access_token: 'dasdfasdfasdfasdf',
+                roles: ['admin', 'user'],
+                user_info: {
+                    username: 'Jason.Jiang',
+                    nickname: 'Jason'
+                }
+            })
         }
     },
     {
