@@ -1,5 +1,6 @@
 {
     "default": {
+        "test_msg": "Hello! {name}",
         "btn_1": "Button 1",
         "submit": "Submit",
         "confirm": "Confirm",

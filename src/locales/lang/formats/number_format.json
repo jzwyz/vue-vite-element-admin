@@ -1,0 +1,16 @@
+{
+    "zh-CN": {
+        "currency": {
+            "style": "currency",
+            "currency": "CNY",
+            "minimumFractionDigits": 2
+        }
+    },
+    "en": {
+        "currency": {
+            "style": "currency",
+            "currency": "USD",
+            "minimumFractionDigits": 2
+        }
+    }
+}

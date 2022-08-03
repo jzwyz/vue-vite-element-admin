@@ -11,7 +11,7 @@
                     </span>
                 </template>
                 <template v-for="subMenuItem in menuItem.children" :key="subMenuItem.name">
-                    <aside-menu-item :perfix="[...perfix, subMenuItem.meta?.perfix || menuItem.path]"
+                    <layout-aside-menu-item :perfix="[...perfix, subMenuItem.meta?.perfix || menuItem.path]"
                         :menuItem="subMenuItem" />
                 </template>
             </el-sub-menu>
@@ -51,7 +51,7 @@ const { perfix, menuItem } = defineProps({
 .aside-menu-item {
     padding: 0px;
 
-    .el-menu-item.is-active {
+    .vvea-menu-item.is-active {
         background-color: $color-primary;
     }
 }

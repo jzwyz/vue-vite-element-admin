@@ -11,7 +11,9 @@ const useConfigStore = defineStore({
         elConfigProvider: {
             size: 'default',
             namespace: 'vvea',
-            button: {},
+            button: {
+                autoInsertSpace: true
+            },
             message: {
                 max: 3
             }

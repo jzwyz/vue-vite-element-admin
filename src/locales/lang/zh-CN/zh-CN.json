@@ -1,5 +1,6 @@
 {
     "default": {
+        "test_msg": "您好! {name}",
         "btn_1": "按钮1",
         "submit": "提交",
         "confirm": "确认",

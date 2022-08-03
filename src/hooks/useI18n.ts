@@ -34,7 +34,7 @@ export function useI18n(namespace?: string): {
     return normalFn;
   }
 
-  const { t, ...methods } = i18n.global;
+  const { t, ...methods } = i18n.global as any;
 
   const tFn: I18nGlobalTranslation = (key: string, ...arg: any[]) => {
     if (!key) return '';
